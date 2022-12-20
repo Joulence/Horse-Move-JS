@@ -1,10 +1,3 @@
-const start = document.getElementById('start');
-
-start.addEventListener('click', () => {
-    document.querySelector('table').style.pointerEvents = 'initial';
-    document.querySelector('table').style.background = 'green';
-});
-
 function init() {
     createTable();
     move();
@@ -25,8 +18,6 @@ function createTable() {
         }
         tblBody.appendChild(row);
     }
-    tbl.style.pointerEvents = 'none';
-    tbl.style.background = 'grey';
     tbl.appendChild(tblBody);
     document.body.appendChild(tbl);
 }

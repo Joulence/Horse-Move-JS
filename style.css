@@ -20,6 +20,10 @@ table {
     cursor: pointer;
 }
 
+.cell:hover {
+    background: rgb(230, 230, 132);
+}
+
 .pressed {
     background: green;
     cursor: default;
@@ -30,4 +34,8 @@ table {
     background: red;
     cursor: default;
     pointer-events: none;
+}
+
+.disabled:hover {
+    background: inherit;
 }

@@ -1,0 +1,33 @@
+body {
+    margin: 50px 0;
+}
+
+table {
+    background: green;
+    margin: 0 auto;
+}
+
+.cell {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 40px;
+    height: 40px;
+    background: #fff;
+    text-align: center;
+    color: #000;
+    font-size: 25px;
+    padding: 10px;
+    border: 1px #fff solid;
+    cursor: pointer;
+}
+
+.pressed {
+    background: green;
+    cursor: default;
+    pointer-events: none;
+}
+
+.blocked {
+    background: red;
+    cursor: default;
+    pointer-events: none;
+}

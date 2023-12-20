@@ -1,8 +1,3 @@
-function init() {
-    createTable();
-    move();
-}
-
 function createTable() {
     const tbl = document.createElement("table");
     const tblBody = document.createElement("tbody");
@@ -10,7 +5,7 @@ function createTable() {
         const row = document.createElement("tr");
         for (let x = 0; x < 10; x++) {
             const cell = document.createElement("td");
-            const cellText = document.createTextNode((x + 10 * y) + 1);
+            const cellText = document.createTextNode(x);
             cell.appendChild(cellText);
             cell.setAttribute('id', `x${x + 1}y${y + 1}`);
             cell.classList.add('cell');
@@ -97,6 +92,11 @@ function isSurrounded(cellX, cellY) {
             gameOver();
         }
     }
+}
+
+function init() {
+    createTable();
+    move();
 }
 
 function gameOver() {

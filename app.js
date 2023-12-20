@@ -1,116 +1,130 @@
+let allMoves = 0;
+
 function createTable() {
-    const tbl = document.createElement("table");
-    const tblBody = document.createElement("tbody");
-    for (let y = 0; y < 10; y++) {
-        const row = document.createElement("tr");
-        for (let x = 0; x < 10; x++) {
-            const cell = document.createElement("td");
-            const cellText = document.createTextNode(x);
-            cell.appendChild(cellText);
-            cell.setAttribute('id', `x${x + 1}y${y + 1}`);
-            cell.classList.add('cell');
-            row.appendChild(cell);
-        }
-        tblBody.appendChild(row);
+  const tbl = document.createElement("table");
+  const tblBody = document.createElement("tbody");
+  for (let y = 0; y < 10; y++) {
+    const row = document.createElement("tr");
+    for (let x = 0; x < 10; x++) {
+      const cell = document.createElement("td");
+      const cellText = document.createTextNode(y * 10 + x + 1);
+      cell.appendChild(cellText);
+      cell.setAttribute("id", `x${x + 1}y${y + 1}`);
+      cell.classList.add("cell");
+      row.appendChild(cell);
     }
-    tbl.appendChild(tblBody);
-    document.body.appendChild(tbl);
+    tblBody.appendChild(row);
+  }
+  tbl.appendChild(tblBody);
+  document.body.appendChild(tbl);
+  document.getElementById("x1y1").classList.add("start");
 }
 
-function move() {
-    document.querySelector('table').addEventListener('click', (event) => {
-        if (event.target.classList.contains('cell')) {
-            let thisCell = event.target;
-            let thisCellData = thisCell.id.slice(1).split('y');
-            let thisCellX = parseInt(thisCellData[0]);
-            let thisCellY = parseInt(thisCellData[1]);
-
-            thisCell.classList.add('pressed', 'disabled');
-            console.log(`x: ${thisCellX}, y: ${thisCellY}`);
-            blockCell(thisCellX, thisCellY);
-            isSurrounded(thisCellX, thisCellY);
-        }
-    });
+function blockedCell(cellX, cellY) {
+  if (cellX + 1 != 11) {
+    document
+      .getElementById(`x${cellX + 1}y${cellY}`)
+      .classList.add("blocked", "disabled");
+  }
+  if (cellX - 1 != 0) {
+    document
+      .getElementById(`x${cellX - 1}y${cellY}`)
+      .classList.add("blocked", "disabled");
+  }
+  if (cellY + 1 != 11) {
+    document
+      .getElementById(`x${cellX}y${cellY + 1}`)
+      .classList.add("blocked", "disabled");
+  }
+  if (cellY - 1 != 0) {
+    document
+      .getElementById(`x${cellX}y${cellY - 1}`)
+      .classList.add("blocked", "disabled");
+  }
 }
 
-function blockCell(cellX, cellY) {
-    if (cellX + 1 != 11) {
-        document.getElementById(`x${cellX + 1}y${cellY}`).classList.add('blocked', 'disabled');
+function availableMove(cellX, cellY) {
+  try {
+    const topRightElement = document.getElementById(
+      `x${cellX - 1}y${cellY + 1}`
+    );
+    const bottomRightElement = document.getElementById(
+      `x${cellX + 1}y${cellY + 1}`
+    );
+    const bottomLeftElement = document.getElementById(
+      `x${cellX + 1}y${cellY - 1}`
+    );
+    const topLeftElement = document.getElementById(
+      `x${cellX - 1}y${cellY - 1}`
+    );
+
+    if (topRightElement && !topRightElement.classList.contains("disabled")) {
+      topRightElement.classList.add("available");
     }
-    if (cellX - 1 != 0) {
-        document.getElementById(`x${cellX - 1}y${cellY}`).classList.add('blocked', 'disabled');
+    if (
+      bottomRightElement &&
+      !bottomRightElement.classList.contains("disabled")
+    ) {
+      bottomRightElement.classList.add("available");
     }
-    if (cellY + 1 != 11) {
-        document.getElementById(`x${cellX}y${cellY + 1}`).classList.add('blocked', 'disabled');
+    if (
+      bottomLeftElement &&
+      !bottomLeftElement.classList.contains("disabled")
+    ) {
+      bottomLeftElement.classList.add("available");
     }
-    if (cellY - 1 != 0) {
-        document.getElementById(`x${cellX}y${cellY - 1}`).classList.add('blocked', 'disabled');
+    if (topLeftElement && !topLeftElement.classList.contains("disabled")) {
+      topLeftElement.classList.add("available");
     }
+  } catch (err) {
+    console.error(err);
+  }
 }
 
-function isSurrounded(cellX, cellY) {
-    if (cellX - 1 < 1) {
-        if (cellY - 1 < 1) {
-            if (document.getElementById(`x${cellX + 1}y${cellY + 1}`).classList.contains('disabled')) {
-                gameOver();
-            }
-        } else if (cellY + 1 > 10) {
-            if (document.getElementById(`x${cellX + 1}y${cellY - 1}`).classList.contains('disabled')) {
-                gameOver();
-            }
-        } else {
-            if (document.getElementById(`x${cellX + 1}y${cellY - 1}`).classList.contains('disabled') && document.getElementById(`x${cellX + 1}y${cellY + 1}`).classList.contains('disabled')) {
-                gameOver();
-            }
-        }
-    }
-
-    else if (cellX + 1 > 10) {
-        if (cellY - 1 < 1) {
-            if (document.getElementById(`x${cellX - 1}y${cellY + 1}`).classList.contains('disabled')) {
-                gameOver();
-            }
-        } else if (cellY + 1 > 10) {
-            if (document.getElementById(`x${cellX - 1}y${cellY - 1}`).classList.contains('disabled')) {
-                gameOver();
-            }
-        } else {
-            if (document.getElementById(`x${cellX - 1}y${cellY - 1}`).classList.contains('disabled') && document.getElementById(`x${cellX - 1}y${cellY + 1}`).classList.contains('disabled')) {
-                gameOver();
-            }
-        }
-    } else if (cellY - 1 < 1) {
-        if (document.getElementById(`x${cellX - 1}y${cellY + 1}`).classList.contains('disabled') && document.getElementById(`x${cellX + 1}y${cellY + 1}`).classList.contains('disabled')) {
-            gameOver();
-        }
-    } else if (cellY + 1 > 10) {
-        if (document.getElementById(`x${cellX - 1}y${cellY - 1}`).classList.contains('disabled') && document.getElementById(`x${cellX + 1}y${cellY - 1}`).classList.contains('disabled')) {
-            gameOver();
-        }
-    } else {
-        if (document.getElementById(`x${cellX + 1}y${cellY + 1}`).classList.contains('disabled') && document.getElementById(`x${cellX + 1}y${cellY - 1}`).classList.contains('disabled') && document.getElementById(`x${cellX - 1}y${cellY + 1}`).classList.contains('disabled') && document.getElementById(`x${cellX - 1}y${cellY - 1}`).classList.contains('disabled')) {
-            gameOver();
-        }
-    }
-}
-
-function init() {
-    createTable();
-    move();
+function removeAvailable() {
+  let availables = document.querySelectorAll(".available");
+  for (let i = 0; i < availables.length; i++) {
+    availables[i].classList.remove("available");
+  }
 }
 
 function gameOver() {
-    alert('Game over');
-    restart();
+  alert("Game Over");
+  location.reload();
 }
 
-function restart() {
-    if (window.confirm('Restart?')) {
-        document.querySelector('table').remove();
-        init();
-    } else {
-        document.querySelector('table').remove();
+function checkAvailable() {
+  let allAvailables = document.querySelectorAll(".available").length;
+  if (allAvailables < 1 && allMoves > 99) {
+    alert("You won!");
+  } else if (allAvailables < 1) {
+    gameOver();
+  }
+}
+
+function move() {
+  document.querySelector("table").addEventListener("click", (event) => {
+    if (event.target.classList.contains("cell")) {
+      let thisCell = event.target;
+      let thisCellData = thisCell.id.slice(1).split("y");
+      let thisCellX = parseInt(thisCellData[0]);
+      let thisCellY = parseInt(thisCellData[1]);
+
+      thisCell.classList.add("pressed", "disabled");
+      console.log(`x: ${thisCellX}, y: ${thisCellY}`);
+      blockedCell(thisCellX, thisCellY);
+      removeAvailable();
+      availableMove(thisCellX, thisCellY);
+      checkAvailable();
     }
+    allMoves = document.querySelectorAll(".disabled").length;
+    console.log(allMoves);
+  });
+}
+
+function init() {
+  createTable();
+  move();
 }
 
 init();

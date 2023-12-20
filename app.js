@@ -1,6 +1,9 @@
 const startBtn = document.getElementById("btn-start");
 const startDiv = document.getElementById("div-start");
 
+let timer = document.getElementById("timer");
+
+let count = 0;
 let startGame = false;
 let allMoves = 0;
 
@@ -93,7 +96,7 @@ function removeAvailable() {
 }
 
 function gameOver() {
-  alert("Game Over");
+  alert(`Game Over! You have got ${allMoves} scores!`);
   location.reload();
 }
 
@@ -131,9 +134,14 @@ function init() {
   move();
 }
 
-startBtn.addEventListener("click", (event) => {
+function incrementTimer() {
+  count += 1;
+  timer.textContent = count;
+  setTimeout(incrementTimer, 1000);
+}
+
+startBtn.addEventListener("click", () => {
   startDiv.remove();
   init();
+  setTimeout(incrementTimer, 1000);
 });
-
-// init();

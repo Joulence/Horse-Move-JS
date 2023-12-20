@@ -1,11 +1,44 @@
 const startBtn = document.getElementById("btn-start");
 const startDiv = document.getElementById("div-start");
+const userNameInput = document.getElementById("input-name");
+
+let userName = "";
 
 let timer = document.getElementById("timer");
 
 let count = 0;
 let startGame = false;
 let allMoves = 0;
+
+async function sendResults() {
+  const url =
+    "https://horse-move-game-default-rtdb.firebaseio.com/results.json";
+
+  const data = {
+    user: userName,
+    scors: allMoves,
+  };
+
+  fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((jsonResponse) => {
+      console.log(jsonResponse);
+    })
+    .catch((error) => {
+      console.error("There was a problem with the fetch operation:", error);
+    });
+}
 
 function createTable() {
   const tbl = document.createElement("table");
@@ -96,6 +129,7 @@ function removeAvailable() {
 }
 
 function gameOver() {
+  sendResults();
   alert(`Game Over! You have got ${allMoves} scores!`);
   location.reload();
 }
@@ -103,6 +137,7 @@ function gameOver() {
 function checkAvailable() {
   let allAvailables = document.querySelectorAll(".available").length;
   if (allAvailables < 1 && allMoves > 99) {
+    sendResults();
     alert("You won!");
     location.reload();
   } else if (allAvailables < 1) {
@@ -142,6 +177,7 @@ function incrementTimer() {
 }
 
 startBtn.addEventListener("click", () => {
+  userName = userNameInput.value;
   startDiv.remove();
   init();
   setTimeout(incrementTimer, 1000);

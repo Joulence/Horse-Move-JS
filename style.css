@@ -1,47 +1,82 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-    margin: 50px 0;
+  margin: 50px 0;
 }
 
 table {
-    background: green;
-    margin: 0 auto;
+  background: green;
+  margin: 0 auto;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+section {
+  text-align: center;
+  padding: 10px;
+}
+
+section div {
+  padding: 0 100px;
+}
+
+button {
+  margin-top: 20px;
+  padding: 20px;
+  border: none;
+  background: #cfadad;
+  cursor: pointer;
+  transition: 0.1s all ease-in-out;
+}
+
+button:hover {
+  background: #aa7777;
+  color: #fff;
 }
 
 .cell {
-    pointer-events: none;
-    font-family: Arial, Helvetica, sans-serif;
-    width: 40px;
-    height: 40px;
-    background: #fff;
-    text-align: center;
-    color: #000;
-    font-size: 25px;
-    padding: 10px;
-    border: 1px #fff solid;
-    cursor: pointer;
+  pointer-events: none;
+  font-family: Arial, Helvetica, sans-serif;
+  width: 40px;
+  height: 40px;
+  background: #fff;
+  text-align: center;
+  color: #000;
+  font-size: 25px;
+  padding: 10px;
+  border: 1px #fff solid;
+  cursor: pointer;
 }
 
 .cell:hover {
-    background: rgb(230, 230, 132);
+  background: rgb(230, 230, 132);
 }
 
-.start, .available {
-    pointer-events: all;
-    background-color: rgb(167, 222, 167);
+.start,
+.available {
+  pointer-events: all;
+  background-color: rgb(167, 222, 167);
 }
 
 .pressed {
-    background: green;
-    cursor: default;
-    pointer-events: none;
+  background: green;
+  cursor: default;
+  pointer-events: none;
 }
 
 .blocked {
-    background: red;
-    cursor: default;
-    pointer-events: none;
+  background: red;
+  cursor: default;
+  pointer-events: none;
 }
 
 .disabled:hover {
-    background: inherit;
+  background: inherit;
 }

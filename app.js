@@ -104,6 +104,7 @@ function checkAvailable() {
   let allAvailables = document.querySelectorAll(".available").length;
   if (allAvailables < 1 && allMoves > 99) {
     alert("You won!");
+    location.reload();
   } else if (allAvailables < 1) {
     gameOver();
   }

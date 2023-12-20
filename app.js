@@ -84,7 +84,7 @@ function availableMove(cellX, cellY) {
       topLeftElement.classList.add("available");
     }
   } catch (err) {
-    console.error(err);
+    // console.error(err);
   }
 }
 
@@ -118,14 +118,14 @@ function move() {
       let thisCellY = parseInt(thisCellData[1]);
 
       thisCell.classList.add("pressed", "disabled");
-      console.log(`x: ${thisCellX}, y: ${thisCellY}`);
+      // console.log(`x: ${thisCellX}, y: ${thisCellY}`);
       blockedCell(thisCellX, thisCellY);
       removeAvailable();
       availableMove(thisCellX, thisCellY);
       checkAvailable();
     }
     allMoves = document.querySelectorAll(".disabled").length;
-    console.log(allMoves);
+    // console.log(allMoves);
   });
 }
 

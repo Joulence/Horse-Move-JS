@@ -8,6 +8,7 @@ table {
 }
 
 .cell {
+    pointer-events: none;
     font-family: Arial, Helvetica, sans-serif;
     width: 40px;
     height: 40px;
@@ -22,6 +23,11 @@ table {
 
 .cell:hover {
     background: rgb(230, 230, 132);
+}
+
+.start, .available {
+    pointer-events: all;
+    background-color: rgb(167, 222, 167);
 }
 
 .pressed {

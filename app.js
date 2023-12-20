@@ -1,3 +1,7 @@
+const startBtn = document.getElementById("btn-start");
+const startDiv = document.getElementById("div-start");
+
+let startGame = false;
 let allMoves = 0;
 
 function createTable() {
@@ -127,4 +131,9 @@ function init() {
   move();
 }
 
-init();
+startBtn.addEventListener("click", (event) => {
+  startDiv.remove();
+  init();
+});
+
+// init();

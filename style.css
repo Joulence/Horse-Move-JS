@@ -40,6 +40,11 @@ button:hover {
   color: #fff;
 }
 
+#div-timer {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
 .cell {
   pointer-events: none;
   font-family: Arial, Helvetica, sans-serif;
@@ -78,4 +83,35 @@ button:hover {
 
 .disabled:hover {
   background: inherit;
+}
+
+@media (max-width: 640px) {
+  .cell {
+    font-size: 20px;
+    padding: 5px;
+  }
+}
+
+@media (max-width: 540px) {
+  .cell {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media (max-width: 450px) {
+  .cell {
+    width: 25px;
+    height: 25px;
+    padding: 3px;
+  }
+}
+
+@media (max-width: 360px) {
+  .cell {
+    width: 24px;
+    height: 24px;
+    padding: 2px;
+    font-size: 15px;
+  }
 }

@@ -24,7 +24,7 @@ Welcome to "Horse Move," an engaging puzzle game that puts your chess skills to 
 
 1. **Download or Clone:**
 
-   - Use the provided [Link](https://joulence.github.io/Horse-Move-JS/) to play the game, or clone the Git repository using the command: `git clone [https://github.com/Joulence/Horse-Move-JS.git]`.
+   - Use the provided [Link](https://joulence.github.io/Horse-Move-JS/) to play the game, or clone the Git repository using the command: `git clone https://github.com/Joulence/Horse-Move-JS.git`.
 
 2. **Navigate to Game Folder:**
 

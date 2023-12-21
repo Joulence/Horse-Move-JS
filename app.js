@@ -208,7 +208,11 @@ function incrementTimer() {
 
 startBtn.addEventListener("click", () => {
   userName = userNameInput.value;
-  startDiv.remove();
-  init();
-  setTimeout(incrementTimer, 1000);
+  if (userName.length < 1) {
+    alert("Enter your name!");
+  } else {
+    startDiv.remove();
+    init();
+    setTimeout(incrementTimer, 1000);
+  }
 });

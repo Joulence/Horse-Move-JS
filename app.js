@@ -1,6 +1,7 @@
 const startBtn = document.getElementById("btn-start");
 const startDiv = document.getElementById("div-start");
 const userNameInput = document.getElementById("input-name");
+const userList = document.getElementById("user-list");
 
 let userName = "";
 
@@ -24,20 +25,46 @@ async function getResults() {
       return response.json();
     })
     .then((jsonData) => {
-      console.log("json:" + jsonData);
+      // console.log(jsonData);
+      let userCounter = 0;
+      if (jsonData != null) {
+        for (const key in jsonData) {
+          if (jsonData.hasOwnProperty(key)) {
+            const userObject = jsonData[key];
+            const scores = userObject.scores;
+            const user = userObject.user;
+
+            const listItem = document.createElement("li");
+            listItem.textContent = `User: ${user}, Scores: ${scores}`;
+
+            userList.appendChild(listItem);
+
+            userCounter++;
+            if (userCounter === 10) {
+              break;
+            }
+          }
+        }
+      } else {
+        const listItem = document.createElement("li");
+        listItem.textContent = `User List is empty`;
+
+        userList.appendChild(listItem);
+      }
     })
     .catch((error) => {
       console.error("There was a problem with the fetch operation:", error);
     });
 }
 
-/* async function sendResults() {
+getResults();
+async function sendResults() {
   const url =
     "https://horse-move-game-default-rtdb.firebaseio.com/results.json";
 
   const data = {
     user: userName,
-    scors: allMoves
+    scores: allMoves,
   };
 
   fetch(url, {
@@ -54,12 +81,12 @@ async function getResults() {
       return response.json();
     })
     .then((jsonResponse) => {
-      console.log(jsonResponse);
+      // console.log(jsonResponse);
     })
     .catch((error) => {
       console.error("There was a problem with the fetch operation:", error);
     });
-} */
+}
 
 function createTable() {
   const tbl = document.createElement("table");

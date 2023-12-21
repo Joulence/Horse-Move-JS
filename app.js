@@ -10,13 +10,34 @@ let count = 0;
 let startGame = false;
 let allMoves = 0;
 
-async function sendResults() {
+let thisMove = undefined;
+
+async function getResults() {
+  const url =
+    "https://horse-move-game-default-rtdb.firebaseio.com/results.json";
+
+  fetch(url)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((jsonData) => {
+      console.log("json: " + jsonData);
+    })
+    .catch((error) => {
+      console.error("There was a problem with the fetch operation:", error);
+    });
+}
+
+/* async function sendResults() {
   const url =
     "https://horse-move-game-default-rtdb.firebaseio.com/results.json";
 
   const data = {
     user: userName,
-    scors: allMoves,
+    scors: allMoves
   };
 
   fetch(url, {
@@ -38,7 +59,7 @@ async function sendResults() {
     .catch((error) => {
       console.error("There was a problem with the fetch operation:", error);
     });
-}
+} */
 
 function createTable() {
   const tbl = document.createElement("table");
@@ -60,7 +81,7 @@ function createTable() {
   document.getElementById("x1y1").classList.add("start");
 }
 
-function blockedCell(cellX, cellY) {
+/* function blockedCell(cellX, cellY) {
   if (cellX + 1 != 11) {
     document
       .getElementById(`x${cellX + 1}y${cellY}`)
@@ -81,40 +102,42 @@ function blockedCell(cellX, cellY) {
       .getElementById(`x${cellX}y${cellY - 1}`)
       .classList.add("blocked", "disabled");
   }
-}
+} */
 
 function availableMove(cellX, cellY) {
   try {
-    const topRightElement = document.getElementById(
-      `x${cellX - 1}y${cellY + 1}`
-    );
-    const bottomRightElement = document.getElementById(
-      `x${cellX + 1}y${cellY + 1}`
-    );
-    const bottomLeftElement = document.getElementById(
-      `x${cellX + 1}y${cellY - 1}`
-    );
-    const topLeftElement = document.getElementById(
-      `x${cellX - 1}y${cellY - 1}`
-    );
+    const move1 = document.getElementById(`x${cellX + 1}y${cellY - 2}`);
+    const move2 = document.getElementById(`x${cellX + 2}y${cellY - 1}`);
+    const move3 = document.getElementById(`x${cellX + 2}y${cellY + 1}`);
+    const move4 = document.getElementById(`x${cellX + 1}y${cellY + 2}`);
+    const move5 = document.getElementById(`x${cellX - 1}y${cellY + 2}`);
+    const move6 = document.getElementById(`x${cellX - 2}y${cellY + 1}`);
+    const move7 = document.getElementById(`x${cellX - 2}y${cellY - 1}`);
+    const move8 = document.getElementById(`x${cellX - 1}y${cellY - 2}`);
 
-    if (topRightElement && !topRightElement.classList.contains("disabled")) {
-      topRightElement.classList.add("available");
+    if (move1 && !move1.classList.contains("disabled")) {
+      move1.classList.add("available");
     }
-    if (
-      bottomRightElement &&
-      !bottomRightElement.classList.contains("disabled")
-    ) {
-      bottomRightElement.classList.add("available");
+    if (move2 && !move2.classList.contains("disabled")) {
+      move2.classList.add("available");
     }
-    if (
-      bottomLeftElement &&
-      !bottomLeftElement.classList.contains("disabled")
-    ) {
-      bottomLeftElement.classList.add("available");
+    if (move3 && !move3.classList.contains("disabled")) {
+      move3.classList.add("available");
     }
-    if (topLeftElement && !topLeftElement.classList.contains("disabled")) {
-      topLeftElement.classList.add("available");
+    if (move4 && !move4.classList.contains("disabled")) {
+      move4.classList.add("available");
+    }
+    if (move5 && !move5.classList.contains("disabled")) {
+      move5.classList.add("available");
+    }
+    if (move6 && !move6.classList.contains("disabled")) {
+      move6.classList.add("available");
+    }
+    if (move7 && !move7.classList.contains("disabled")) {
+      move7.classList.add("available");
+    }
+    if (move8 && !move8.classList.contains("disabled")) {
+      move8.classList.add("available");
     }
   } catch (err) {
     // console.error(err);
@@ -153,9 +176,12 @@ function move() {
       let thisCellX = parseInt(thisCellData[0]);
       let thisCellY = parseInt(thisCellData[1]);
 
-      thisCell.classList.add("pressed", "disabled");
+      try {
+        document.querySelectorAll(".current")[0].classList.remove("current");
+      } catch (err) {}
+      thisCell.classList.add("pressed", "disabled", "current");
+
       // console.log(`x: ${thisCellX}, y: ${thisCellY}`);
-      blockedCell(thisCellX, thisCellY);
       removeAvailable();
       availableMove(thisCellX, thisCellY);
       checkAvailable();

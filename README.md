@@ -4,7 +4,7 @@ Welcome to "Horse Move," an engaging puzzle game that puts your chess skills to 
 
 ## Getting Started:
 
-- **Chess-Inspired Challenge:** Navigate the game board using the distinctive moves of a chess knight. Swipe or tap to explore the grid and conquer each square.
+- **Chess-Inspired Challenge:** Navigate the game board using the distinctive moves of a chess knight. Click or tap to explore the grid and conquer each square.
 
 - **Intuitive Gameplay:** Easy-to-learn controls make "Horse Move" accessible to players of all skill levels. Simply make your moves to progress through the levels.
 
@@ -12,7 +12,7 @@ Welcome to "Horse Move," an engaging puzzle game that puts your chess skills to 
 
 - **10x10 Game Board:** Immerse yourself in a visually stunning game environment with a 10x10 grid, offering ample room for exploration and challenge.
 
-- **Dynamic Color Palette:** Watch as the game board comes to life with vibrant green and red hues as you successfully conquer each square.
+- **Dynamic Color Palette:** Watch as the game board comes to life with green hues as you successfully conquer each square.
 
 - **Strategic Thinking:** Plan your moves carefully to avoid getting stuck! The game becomes progressively challenging, requiring you to think ahead and anticipate the knight's path.
 

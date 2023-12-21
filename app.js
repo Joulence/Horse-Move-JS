@@ -8,7 +8,6 @@ let userName = "";
 let timer = document.getElementById("timer");
 
 let count = 0;
-let startGame = false;
 let allMoves = 0;
 
 let thisMove = undefined;

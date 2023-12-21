@@ -41,6 +41,10 @@ button:hover {
   color: #fff;
 }
 
+ul {
+  list-style: none;
+}
+
 #div-timer {
   text-align: center;
   margin-bottom: 20px;

@@ -86,6 +86,10 @@ button:hover {
   background: inherit;
 }
 
+.current {
+  background: yellow !important;
+}
+
 @media (max-width: 640px) {
   .cell {
     font-size: 20px;

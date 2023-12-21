@@ -39,10 +39,10 @@ async function getResults() {
 
             userList.appendChild(listItem);
 
-            userCounter++;
+            /* userCounter++;
             if (userCounter === 10) {
               break;
-            }
+            } */
           }
         }
       } else {

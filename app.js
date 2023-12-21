@@ -24,7 +24,7 @@ async function getResults() {
       return response.json();
     })
     .then((jsonData) => {
-      console.log("json: " + jsonData);
+      console.log("json:" + jsonData);
     })
     .catch((error) => {
       console.error("There was a problem with the fetch operation:", error);
@@ -80,29 +80,6 @@ function createTable() {
   document.body.appendChild(tbl);
   document.getElementById("x1y1").classList.add("start");
 }
-
-/* function blockedCell(cellX, cellY) {
-  if (cellX + 1 != 11) {
-    document
-      .getElementById(`x${cellX + 1}y${cellY}`)
-      .classList.add("blocked", "disabled");
-  }
-  if (cellX - 1 != 0) {
-    document
-      .getElementById(`x${cellX - 1}y${cellY}`)
-      .classList.add("blocked", "disabled");
-  }
-  if (cellY + 1 != 11) {
-    document
-      .getElementById(`x${cellX}y${cellY + 1}`)
-      .classList.add("blocked", "disabled");
-  }
-  if (cellY - 1 != 0) {
-    document
-      .getElementById(`x${cellX}y${cellY - 1}`)
-      .classList.add("blocked", "disabled");
-  }
-} */
 
 function availableMove(cellX, cellY) {
   try {

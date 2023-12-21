@@ -43,6 +43,8 @@ button:hover {
 
 ul {
   list-style: none;
+  max-height: 200px;
+  overflow: auto;
 }
 
 #div-timer {

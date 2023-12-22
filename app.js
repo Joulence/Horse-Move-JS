@@ -10,8 +10,6 @@ let timer = document.getElementById("timer");
 let count = 0;
 let allMoves = 0;
 
-let thisMove = undefined;
-
 async function getResults() {
   const url =
     "https://horse-move-game-default-rtdb.firebaseio.com/results.json";
@@ -59,7 +57,7 @@ async function getResults() {
 getResults();
 async function sendResults() {
   const url =
-    "https://horse-move-game-default-rtdb.firebaseio.com/results.json";
+    "https://horse-move-game-default-rtdb.firebaseio.com/results1.json";
 
   const data = {
     user: userName,
@@ -162,7 +160,7 @@ function gameOver() {
 
 function checkAvailable() {
   let allAvailables = document.querySelectorAll(".available").length;
-  if (allAvailables < 1 && allMoves > 99) {
+  if (allMoves > 99) {
     sendResults();
     alert("You won!");
     location.reload();
@@ -173,6 +171,7 @@ function checkAvailable() {
 
 function move() {
   document.querySelector("table").addEventListener("click", (event) => {
+    // allMoves = document.querySelectorAll(".disabled").length;
     if (event.target.classList.contains("cell")) {
       let thisCell = event.target;
       let thisCellData = thisCell.id.slice(1).split("y");
@@ -183,13 +182,12 @@ function move() {
         document.querySelectorAll(".current")[0].classList.remove("current");
       } catch (err) {}
       thisCell.classList.add("pressed", "disabled", "current");
-
+      allMoves++;
       // console.log(`x: ${thisCellX}, y: ${thisCellY}`);
       removeAvailable();
       availableMove(thisCellX, thisCellY);
       checkAvailable();
     }
-    allMoves = document.querySelectorAll(".disabled").length;
     // console.log(allMoves);
   });
 }

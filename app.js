@@ -57,7 +57,7 @@ async function getResults() {
 getResults();
 async function sendResults() {
   const url =
-    "https://horse-move-game-default-rtdb.firebaseio.com/results1.json";
+    "https://horse-move-game-default-rtdb.firebaseio.com/results.json";
 
   const data = {
     user: userName,
